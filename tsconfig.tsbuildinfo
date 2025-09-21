@@ -1,1 +1,1 @@
-{"root":["./src/app.ts","./src/server.ts"],"version":"5.9.2"}
+{"root":["./src/app.ts","./src/server.ts","./src/config/env.ts","./src/config/logger.ts","./src/middlewares/globalerrorhandler.ts","./src/middlewares/notfound.ts","./src/routes/index.ts","./src/routes/v1/index.ts","./src/utils/apierror.ts","./src/utils/statuscodes.ts"],"version":"5.9.2"}
