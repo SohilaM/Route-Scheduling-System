@@ -1,0 +1,35 @@
+{
+  "name": "route-scheduling-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon ./src/server.ts",
+    "prod": "NODE_ENV=production node ./dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SohilaM/Route-Scheduling-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SohilaM/Route-Scheduling-System/issues"
+  },
+  "homepage": "https://github.com/SohilaM/Route-Scheduling-System#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "winston": "^3.17.0",
+    "zod": "^4.1.0",
+    "zod-validation-error": "^4.0.1"
+  }
+}
