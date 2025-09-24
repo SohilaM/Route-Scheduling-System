@@ -1,9 +1,10 @@
-import { Drivers } from '@prisma/client';
+import { Drivers, Routes } from '@prisma/client';
 
 import { CreateDriverType, driversRouteType } from '../types/driver.types';
 
 export interface IDriversRepository {
-  createDriver(data: CreateDriverType): Promise<Drivers>;
   findAvailableDrivers(): Promise<Drivers[]>;
+  getDriversHistory(id: string): Promise<Routes[]>;
+  createDriver(data: CreateDriverType): Promise<Drivers>;
   findDriversAssignedRoute(): Promise<driversRouteType[]>;
 }

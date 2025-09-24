@@ -20,3 +20,12 @@ export const getSchedule = async (
   const result = await driverService.getSchedule();
   sendResponse(res, result);
 };
+
+export const getDriversHistory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = await driverService.getDriversHistory(req.params.id!);
+  sendResponse(res, result);
+};

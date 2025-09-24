@@ -1,6 +1,6 @@
 import prisma from '../config/prisma';
-import { IDriversRepository } from '../interfaces/driver.interface';
 import { CreateDriverType } from '../types/driver.types';
+import { IDriversRepository } from '../interfaces/driver.interface';
 
 class DriverRepository implements IDriversRepository {
   createDriver = async (data: CreateDriverType) => {
@@ -39,6 +39,23 @@ class DriverRepository implements IDriversRepository {
     });
 
     return driversRoute;
+  };
+
+  getDriversHistory = async (id: string) => {
+    const driversHistory = await prisma.drivers.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        Routes: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
+      },
+    });
+
+    return driversHistory?.Routes ?? [];
   };
 }
 

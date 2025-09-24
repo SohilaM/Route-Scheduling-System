@@ -6,6 +6,7 @@ import { IDriversRepository } from '../interfaces/driver.interface';
 
 class DriverService {
   constructor(private repo: IDriversRepository) {}
+
   createDriver = async (data: CreateDriverType) => {
     const driver = await this.repo.createDriver(data);
 
@@ -17,13 +18,26 @@ class DriverService {
 
     return result;
   };
+
   getSchedule = async () => {
     const driversRoute = await this.repo.findDriversAssignedRoute();
 
     const result: APIResponse = {
       status: 'success',
-      statusCode: statusCodes.Created,
+      statusCode: statusCodes.OK,
       data: driversRoute,
+    };
+
+    return result;
+  };
+
+  getDriversHistory = async (id: string) => {
+    const driversHistory = await this.repo.getDriversHistory(id);
+
+    const result: APIResponse = {
+      status: 'success',
+      statusCode: statusCodes.OK,
+      data: driversHistory,
     };
 
     return result;
