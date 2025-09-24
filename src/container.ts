@@ -1,11 +1,8 @@
-import { PrismaClient } from '@prisma/client/extension';
-
+import prisma from './config/prisma';
 import { RouteService } from './services/route.service';
 import { DriverService } from './services/driver.service';
 import RouteRepository from './repositories/route.repository';
 import DriverRepository from './repositories/driver.repository';
-
-const prisma = new PrismaClient();
 
 export const container = {
   routeRepo: new RouteRepository(prisma),
