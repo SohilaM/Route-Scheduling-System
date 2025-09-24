@@ -1,15 +1,18 @@
-import prisma from '../config/prisma';
+import { PrismaClient } from '@prisma/client/extension';
+
 import { CreateDriverType } from '../types/driver.types';
 import { IDriversRepository } from '../interfaces/driver.interface';
 
 class DriverRepository implements IDriversRepository {
+  constructor(private prisma: PrismaClient) {}
+
   createDriver = async (data: CreateDriverType) => {
-    const driver = await prisma.drivers.create({ data });
+    const driver = await this.prisma.drivers.create({ data });
     return driver;
   };
 
   findAvailableDrivers = async () => {
-    const drivers = await prisma.drivers.findMany({
+    const drivers = await this.prisma.drivers.findMany({
       where: {
         isAvailable: true,
       },
@@ -18,7 +21,7 @@ class DriverRepository implements IDriversRepository {
   };
 
   findDriversAssignedRoute = async () => {
-    const driversRoute = await prisma.drivers.findMany({
+    const driversRoute = await this.prisma.drivers.findMany({
       where: {
         isAvailable: false,
       },
@@ -42,7 +45,7 @@ class DriverRepository implements IDriversRepository {
   };
 
   getDriversHistory = async (id: string) => {
-    const driversHistory = await prisma.drivers.findUnique({
+    const driversHistory = await this.prisma.drivers.findUnique({
       where: {
         id,
       },
@@ -59,4 +62,4 @@ class DriverRepository implements IDriversRepository {
   };
 }
 
-export default new DriverRepository();
+export default DriverRepository;

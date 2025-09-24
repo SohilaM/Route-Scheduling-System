@@ -1,10 +1,9 @@
 import statusCodes from '../utils/statusCodes';
 import { APIResponse } from '../types/api.types';
 import { CreateDriverType } from '../types/driver.types';
-import driverRepository from '../repositories/driver.repository';
 import { IDriversRepository } from '../interfaces/driver.interface';
 
-class DriverService {
+export class DriverService {
   constructor(private repo: IDriversRepository) {}
 
   createDriver = async (data: CreateDriverType) => {
@@ -43,5 +42,3 @@ class DriverService {
     return result;
   };
 }
-
-export default new DriverService(driverRepository);

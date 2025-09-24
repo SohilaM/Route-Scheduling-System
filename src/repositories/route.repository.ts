@@ -1,10 +1,13 @@
-import prisma from '../config/prisma';
+import { PrismaClient } from '@prisma/client/extension';
+
 import APIError from '../utils/APIError';
 import statusCodes from '../utils/statusCodes';
 import { CreateRouteType } from '../types/route.types';
 import { IRoutesRepository } from '../interfaces/route.interface';
 
 class RouteRepository implements IRoutesRepository {
+  constructor(private prisma: PrismaClient) {}
+
   createRoute = async (body: CreateRouteType) => {
     if (body.driverId === '')
       throw new APIError(
@@ -20,12 +23,12 @@ class RouteRepository implements IRoutesRepository {
       driverId: body.driverId ?? null,
     };
 
-    const route = await prisma.routes.create({ data });
+    const route = await this.prisma.routes.create({ data });
     return route;
   };
 
   getRoute = async (id: string) => {
-    const route = await prisma.routes.findUnique({
+    const route = await this.prisma.routes.findUnique({
       where: {
         id,
       },
@@ -38,7 +41,7 @@ class RouteRepository implements IRoutesRepository {
   };
 
   getAllRoutes = async (page: number, limit: number) => {
-    const routes = await prisma.routes.findMany({
+    const routes = await this.prisma.routes.findMany({
       skip: (page - 1) * limit,
       take: limit,
       orderBy: {
@@ -50,4 +53,4 @@ class RouteRepository implements IRoutesRepository {
   };
 }
 
-export default new RouteRepository();
+export default RouteRepository;

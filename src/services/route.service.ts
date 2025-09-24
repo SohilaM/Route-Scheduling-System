@@ -1,10 +1,9 @@
 import statusCodes from '../utils/statusCodes';
 import { APIResponse } from '../types/api.types';
 import { CreateRouteType } from '../types/route.types';
-import routeRepository from '../repositories/route.repository';
 import { IRoutesRepository } from '../interfaces/route.interface';
 
-class RouteService {
+export class RouteService {
   constructor(private repo: IRoutesRepository) {}
 
   createRoute = async (data: CreateRouteType) => {
@@ -44,5 +43,3 @@ class RouteService {
     return result;
   };
 }
-
-export default new RouteService(routeRepository);

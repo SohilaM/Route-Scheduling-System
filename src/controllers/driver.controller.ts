@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 
+import { container } from '../container';
 import sendResponse from '../utils/sendResponse';
-import driverService from '../services/driver.service';
 
 export const createDriver = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const result = await driverService.createDriver(req.body);
+  const result = await container.driverService.createDriver(req.body);
   sendResponse(res, result);
 };
 
@@ -17,7 +17,7 @@ export const getSchedule = async (
   res: Response,
   next: NextFunction
 ) => {
-  const result = await driverService.getSchedule();
+  const result = await container.driverService.getSchedule();
   sendResponse(res, result);
 };
 
@@ -26,6 +26,8 @@ export const getDriversHistory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const result = await driverService.getDriversHistory(req.params.id!);
+  const result = await container.driverService.getDriversHistory(
+    req.params.id!
+  );
   sendResponse(res, result);
 };
