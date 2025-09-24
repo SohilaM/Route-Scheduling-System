@@ -17,6 +17,17 @@ class DriverService {
 
     return result;
   };
+  getSchedule = async () => {
+    const driversRoute = await this.repo.findDriversAssignedRoute();
+
+    const result: APIResponse = {
+      status: 'success',
+      statusCode: statusCodes.Created,
+      data: driversRoute,
+    };
+
+    return result;
+  };
 }
 
 export default new DriverService(driverRepository);

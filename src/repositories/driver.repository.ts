@@ -4,8 +4,41 @@ import { CreateDriverType } from '../types/driver.types';
 
 class DriverRepository implements IDriversRepository {
   createDriver = async (data: CreateDriverType) => {
-    const route = await prisma.drivers.create({ data });
-    return route;
+    const driver = await prisma.drivers.create({ data });
+    return driver;
+  };
+
+  findAvailableDrivers = async () => {
+    const drivers = await prisma.drivers.findMany({
+      where: {
+        isAvailable: true,
+      },
+    });
+    return drivers;
+  };
+
+  findDriversAssignedRoute = async () => {
+    const driversRoute = await prisma.drivers.findMany({
+      where: {
+        isAvailable: false,
+      },
+      select: {
+        name: true,
+        Routes: {
+          select: {
+            id: true,
+            startLocation: true,
+            endLocation: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    });
+
+    return driversRoute;
   };
 }
 

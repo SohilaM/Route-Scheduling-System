@@ -11,3 +11,12 @@ export const createDriver = async (
   const result = await driverService.createDriver(req.body);
   sendResponse(res, result);
 };
+
+export const getSchedule = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = await driverService.getSchedule();
+  sendResponse(res, result);
+};
