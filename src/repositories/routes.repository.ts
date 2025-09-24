@@ -1,9 +1,10 @@
 import prisma from '../config/prisma';
+import { IRoutesRepository } from '../interfaces/route.interface';
 import { CreateRouteType } from '../types/route.types';
 import APIError from '../utils/APIError';
 import statusCodes from '../utils/statusCodes';
 
-class RoutesRepository {
+class RoutesRepository implements IRoutesRepository {
   createRoute = async (body: CreateRouteType) => {
     if (body.driverId === '')
       throw new APIError(
