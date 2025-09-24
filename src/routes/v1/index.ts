@@ -1,13 +1,8 @@
-import { NextFunction, Request, Response, Router } from 'express';
-import statusCodes from '../../utils/statusCodes';
+import { Router } from 'express';
+import { routeRoutes } from './route.routes';
 
 const router = Router();
 
-router.use('/soso', (req: Request, res: Response, next: NextFunction) => {
-  res.status(statusCodes.OK).json({
-    status: 'success',
-    message: 'hi soso🐳',
-  });
-});
+router.use('/routes', routeRoutes);
 
 export const v1Routes = router;
