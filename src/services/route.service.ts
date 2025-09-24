@@ -30,6 +30,19 @@ class RouteService {
 
     return result;
   };
+
+  getAllRoutes = async (page: number, limit: number) => {
+    const routes = await this.repo.getAllRoutes(page, limit);
+
+    const result: APIResponse = {
+      status: 'success',
+      statusCode: statusCodes.OK,
+      data: routes,
+      size: routes.length,
+    };
+
+    return result;
+  };
 }
 
 export default new RouteService(routeRepository);

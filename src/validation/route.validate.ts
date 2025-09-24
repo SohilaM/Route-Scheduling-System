@@ -19,3 +19,10 @@ export const CreateRouteSchema = z.object({
     })
     .strict(),
 });
+
+export const PaginationSchema = z.object({
+  query: z.object({
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().default(10),
+  }),
+});
