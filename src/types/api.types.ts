@@ -1,3 +1,7 @@
+import { z } from 'zod';
+
+import { IdSchema } from '../validation/api.validate';
+
 export type APIResponse = {
   status: string;
   statusCode: number;
@@ -8,3 +12,5 @@ export type APIResponse = {
   timestamp?: string;
   size?: number;
 };
+
+export type Id = z.output<typeof IdSchema>['params'];

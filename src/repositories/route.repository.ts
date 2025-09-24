@@ -1,10 +1,10 @@
 import prisma from '../config/prisma';
-import { IRoutesRepository } from '../interfaces/route.interface';
-import { CreateRouteType } from '../types/route.types';
 import APIError from '../utils/APIError';
 import statusCodes from '../utils/statusCodes';
+import { CreateRouteType } from '../types/route.types';
+import { IRoutesRepository } from '../interfaces/route.interface';
 
-class RoutesRepository implements IRoutesRepository {
+class RouteRepository implements IRoutesRepository {
   createRoute = async (body: CreateRouteType) => {
     if (body.driverId === '')
       throw new APIError(
@@ -23,6 +23,19 @@ class RoutesRepository implements IRoutesRepository {
     const route = await prisma.routes.create({ data });
     return route;
   };
+
+  getRoute = async (id: string) => {
+    const route = await prisma.routes.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!route)
+      throw new APIError('No Route found with this Id', statusCodes.NotFound);
+
+    return route;
+  };
 }
 
-export default new RoutesRepository();
+export default new RouteRepository();

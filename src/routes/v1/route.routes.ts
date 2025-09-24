@@ -1,8 +1,13 @@
 import { Router } from 'express';
-import { createRoute } from '../../controllers/routes.controller';
+
+import validate from '../../middlewares/validate';
+import { IdSchema } from '../../validation/api.validate';
+import { CreateRouteSchema } from '../../validation/route.validate';
+import { createRoute, getRoute } from '../../controllers/routes.controller';
 
 const router = Router();
 
-router.post('/', createRoute);
+router.post('/', validate(CreateRouteSchema), createRoute);
+router.get('/:id', validate(IdSchema), getRoute);
 
 export const routeRoutes = router;
