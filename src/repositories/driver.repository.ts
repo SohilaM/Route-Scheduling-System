@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client/extension';
 
 import { CreateDriverType } from '../types/driver.types';
-import { IDriversRepository } from '../interfaces/driver.interface';
+import { IDriversRepository } from '../interfaces/driver.repository.interface';
 
 class DriverRepository implements IDriversRepository {
   constructor(private prisma: PrismaClient) {}

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client/extension';
 import APIError from '../utils/APIError';
 import statusCodes from '../utils/statusCodes';
 import { CreateRouteType } from '../types/route.types';
-import { IRoutesRepository } from '../interfaces/route.interface';
+import { IRoutesRepository } from '../interfaces/route.repository.interface';
 
 class RouteRepository implements IRoutesRepository {
   constructor(private prisma: PrismaClient) {}
