@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client/extension';
+import { PrismaClient } from '@prisma/client';
 
 import { CreateDriverType } from '../types/driver.types';
 import { IDriversRepository } from '../interfaces/driver.repository.interface';
@@ -59,6 +59,15 @@ class DriverRepository implements IDriversRepository {
     });
 
     return driversHistory?.Routes ?? [];
+  };
+
+  updateDriverAvailability = async (id: string, availability: boolean) => {
+    const driver = await this.prisma.drivers.update({
+      where: { id },
+      data: { isAvailable: availability },
+    });
+
+    return driver;
   };
 }
 

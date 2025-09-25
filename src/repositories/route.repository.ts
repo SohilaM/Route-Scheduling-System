@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client/extension';
+import { PrismaClient } from '@prisma/client';
 
 import APIError from '../utils/APIError';
 import statusCodes from '../utils/statusCodes';
@@ -50,6 +50,15 @@ class RouteRepository implements IRoutesRepository {
     });
 
     return routes;
+  };
+
+  assignRoute = async (id: string, driverId: string) => {
+    const route = await this.prisma.routes.update({
+      where: { id },
+      data: { driverId, status: 'ASSIGNED' },
+    });
+
+    return route;
   };
 }
 

@@ -7,4 +7,5 @@ export interface IDriversRepository {
   getDriversHistory(id: string): Promise<Routes[]>;
   createDriver(data: CreateDriverType): Promise<Drivers>;
   findDriversAssignedRoute(): Promise<driversRouteType[]>;
+  updateDriverAvailability(id: string, availability: boolean): Promise<Drivers>;
 }

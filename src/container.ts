@@ -9,7 +9,7 @@ export const container = {
   driverRepo: new DriverRepository(prisma),
 
   get routeService() {
-    return new RouteService(this.routeRepo);
+    return new RouteService(this.routeRepo, this.driverRepo);
   },
   get driverService() {
     return new DriverService(this.driverRepo);
